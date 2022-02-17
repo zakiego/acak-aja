@@ -9,7 +9,7 @@
   }
 
   .text-mini-link {
-    @apply rounded-md bg-gray-200/75 px-2 py-1.5 text-xs text-black/60 transition-all hover:bg-gray-300/75;
+    @apply rounded-md bg-sky-700/80 px-2 py-1.5 text-xs text-white transition-all hover:bg-sky-700;
   }
 
   .input-primary {
@@ -57,7 +57,7 @@
   }
 
   .card {
-    @apply rounded-lg border-[1px] bg-white py-5 text-center text-lg shadow-lg transition-all ease-in-out hover:bg-gray-600 hover:text-white;
+    @apply rounded-lg border-[1px] bg-white py-5 text-center text-lg shadow-lg transition-all ease-in-out hover:bg-sky-700/80 hover:text-white;
   }
 
   .disable {
