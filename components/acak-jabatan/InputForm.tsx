@@ -24,8 +24,24 @@ interface InputInterface {
 
 export default function NameInputForm(props: InputInterface) {
   const [nameLength, setNameLength] = useState<number>(0);
-
   const [tempListName, setTempListName] = useState<string[]>([]);
+
+  const handleEnter = async (event: any) => {
+    if (event.key.toLowerCase() === "enter") {
+      event.preventDefault();
+
+      const form = event.target.form;
+      const index = [...form].indexOf(event.target);
+
+      //  check is in the last of column, if yes, add new column
+      if (form.length - index == 5) {
+        await props.handleAddClick();
+      }
+
+      // if no, just to move next column
+      form.elements[index + 2].focus();
+    }
+  };
 
   return (
     <>
@@ -65,6 +81,9 @@ export default function NameInputForm(props: InputInterface) {
                       <input
                         placeholder="Nama jabatan yang mau diacak"
                         value={props.listPosition[id]}
+                        onKeyDown={(e) => {
+                          handleEnter(e);
+                        }}
                         onChange={async (e) => {
                           e.preventDefault();
                           props.handleInputChange(e, id);
