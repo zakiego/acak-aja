@@ -11,7 +11,7 @@ export default function RandomResult(props: InputInterface) {
   return (
     <>
       <h3 className="text-2xl font-medium">Hasil Pengacakan</h3>
-      <div>
+      <div className="mt-7 md:grid md:grid-cols-2 md:gap-10">
         {props.listDayResult.map((x, i) => {
           return (
             <div
