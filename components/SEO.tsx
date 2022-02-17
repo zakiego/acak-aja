@@ -12,7 +12,7 @@ export default function SEO({ title }: SEOProps) {
     } Acak Aja | Daripada Tunjuk-Tunjukkan`,
     description: "Acak jabatan, kelompok, piket, dan angka ga pake lama",
     url: "https://acak-aja.vercel.app",
-    image: "https://acak-aja.vercel.app/banner.png",
+    image: "https://acak-aja.vercel.app/banner.jpg",
     author: "zakiego",
   };
 
@@ -22,12 +22,15 @@ export default function SEO({ title }: SEOProps) {
     <NextSeo
       title={titleTemplate}
       description={seo.description}
-      canonical="https://www.canonical.ie/"
+      canonical={seo.url}
       openGraph={{
         url: seo.url,
         title: titleTemplate,
         description: seo.description,
-        images: [{ url: seo.image }],
+        images: [
+          { url: seo.image, alt: "Acak Aja Image" },
+          { url: seo.image, width: 800, height: 600, alt: "Acak Aja Image" },
+        ],
         site_name: titleTemplate,
       }}
       twitter={{
