@@ -4,7 +4,7 @@ Daripada tunjuk-tunjukkan, mending acak aja.
 
 ## Latar Belakang
 
-Project ini diinisasi karena beberapa kali saya harus mengacak kelompok, menggunakan Google Spreadsheet. Sayangnya, rumus di Spreadsheet tidak re-useble. Sehingga, ketika harus mengacak data yang lain, harus membuat rumus lagi.
+Project ini diinisiasi karena beberapa kali saya harus mengacak kelompok, menggunakan Google Spreadsheet. Sayangnya, rumus di Spreadsheet tidak reusable. Sehingga, ketika harus mengacak data yang lain, harus membuat rumus lagi.
 
 ## Fitur
 
