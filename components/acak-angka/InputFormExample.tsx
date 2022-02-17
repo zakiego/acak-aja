@@ -28,32 +28,34 @@ export default function NameInputFormExample(props: InputInterface) {
           props.handleRandomize();
         }}
       >
-        <div>
-          <label htmlFor="start-number" className="text-xl font-medium">
-            Acaknya dari angka berapa?
-          </label>
-          <input
-            id="start-number"
-            type="number"
-            defaultValue={props.number.start}
-            disabled={true}
-            className="input-primary disable mt-3 block"
-            onChange={(e) => props.handleInputChange(e, "start")}
-          />
-        </div>
+        <div className="flex justify-between gap-6">
+          <div>
+            <label htmlFor="start-number" className="text-xl font-medium">
+              Dari
+            </label>
+            <input
+              id="start-number"
+              type="number"
+              defaultValue={props.number.start}
+              disabled={true}
+              className="input-primary disable mt-3 block"
+              onChange={(e) => props.handleInputChange(e, "start")}
+            />
+          </div>
 
-        <div className="mt-5">
-          <label htmlFor="end-number" className="text-xl font-medium">
-            Sampai angka berapa?
-          </label>
-          <input
-            id="end-number"
-            type="number"
-            defaultValue={props.number.end}
-            disabled={true}
-            className="input-primary disable mt-3 block"
-            onChange={(e) => props.handleInputChange(e, "end")}
-          />
+          <div>
+            <label htmlFor="end-number" className="text-xl font-medium">
+              Sampai
+            </label>
+            <input
+              id="end-number"
+              type="number"
+              defaultValue={props.number.end}
+              disabled={true}
+              className="input-primary disable mt-3 block"
+              onChange={(e) => props.handleInputChange(e, "end")}
+            />
+          </div>
         </div>
 
         <div className="mt-5">
