@@ -31,8 +31,10 @@ export default function Home() {
           <h3 className="mt-4 opacity-70 md:text-xl">
             Daripada tunjuk-tunjukkan
           </h3>
-          <div className="text-mini-link mx-auto mt-4 max-w-max">
-            <Link href="/saran">Kamu punya saran?</Link>
+          <div className=" mx-auto mt-4 max-w-max ">
+            <Link href="/saran">
+              <a className="text-mini-link">Kamu punya saran?</a>
+            </Link>
           </div>
         </div>
         <div className="mt-7 grid grid-cols-1 gap-7">
