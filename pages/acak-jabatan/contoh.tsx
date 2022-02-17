@@ -23,7 +23,7 @@ export default function AcakJabatan() {
     <Layout title={"Contoh Acak Jabatan"}>
       <div className="mb-5 text-center">
         <Link href="/acak-jabatan" passHref>
-          <a className=" rounded-md bg-gray-200/75 px-2 py-1.5 text-xs text-black/60 transition-all hover:bg-gray-300/75">
+          <a className=" text-mini-link">
             Klik di sini untuk kembali ke halaman sebelumnya
           </a>
         </Link>

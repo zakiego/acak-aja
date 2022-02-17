@@ -32,9 +32,7 @@ export default function AcakKelompok() {
     <Layout title={"Acak Kelompok"}>
       <div className="mb-10 text-center ">
         <Link href="/acak-kelompok/contoh">
-          <a className="rounded-md bg-gray-200/75 px-2 py-1.5 text-xs text-black/60 transition-all hover:bg-gray-300/75">
-            Klik di sini untuk melihat contoh
-          </a>
+          <a className="text-mini-link">Klik di sini untuk melihat contoh</a>
         </Link>
       </div>
 
