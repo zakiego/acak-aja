@@ -1,10 +1,11 @@
 import { GetServerSideProps } from "next";
 import { useState } from "react";
 
+import InputFormExample from "~/components/acak-jabatan/InputFormExample";
+import RandomResult from "~/components/acak-jabatan/RandomResult";
 import { ShuffleArray, SplitString } from "~/components/Helper";
-import InputFormExample from "~/components/jabatan/InputFormExample";
-import RandomResult from "~/components/jabatan/RandomResult";
 import Layout from "~/components/Layout";
+import { mockMatkul } from "~/components/Mock";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
@@ -34,39 +35,37 @@ export default function AcakJabatan({ id }: Context) {
 
   const mockName = data.find((x) => x.class == id)?.name as string;
 
-  const mockPosition =
-    "Metode Penelitian Kuantitatif\nSosiologi Pendidikan\nSosiologi Perkoatan\nSosiologi Media\nGlobalisasi dan Isu Internasional\nSosiologi Industri\nSosiologi Gender\nSosiologi Keluarga\nSosiologi Pedesaan\nTipologi Sosial\nSosiologi Korupsi\nSosiologi Lingkungan\nSosiologi Politik\nSosiologi Kesehatan";
-
+  const mockPosition = mockMatkul;
   const [listName, setListName] = useState<string[]>([
-    ...ShuffleArray(SplitString(mockName)),
+    ...(ShuffleArray(SplitString(mockName)) as string[]),
   ]);
   const [listPosition, setListPosition] = useState<string[]>([
     ...SplitString(mockPosition),
   ]);
 
   async function randomFunction(listName: string[]) {
-    setListName(ShuffleArray([...listName]));
+    setListName(ShuffleArray([...listName]) as string[]);
   }
 
-  const handleAddClick = () => {
-    setListPosition([...listPosition, ""]);
-  };
+  // const handleAddClick = () => {
+  //   setListPosition([...listPosition, ""]);
+  // };
 
-  const handleRemoveClick = (index: number) => {
-    const list = [...listPosition];
-    list.splice(index, 1);
-    setListPosition(list);
-  };
+  // const handleRemoveClick = (index: number) => {
+  //   const list = [...listPosition];
+  //   list.splice(index, 1);
+  //   setListPosition(list);
+  // };
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
-    const { value } = e.target;
-    const list = [...listPosition];
-    list[index] = value;
-    setListPosition(list);
-  };
+  // const handleInputChange = (
+  //   e: React.ChangeEvent<HTMLInputElement>,
+  //   index: number,
+  // ) => {
+  //   const { value } = e.target;
+  //   const list = [...listPosition];
+  //   list[index] = value;
+  //   setListPosition(list);
+  // };
 
   return (
     <Layout title={"Acak Jabatan"}>
@@ -77,9 +76,6 @@ export default function AcakJabatan({ id }: Context) {
         <InputFormExample
           mockName={mockName}
           mockPosition={SplitString(mockPosition)}
-          handleInputChange={handleInputChange}
-          handleRemoveClick={handleRemoveClick}
-          handleAddClick={handleAddClick}
           randomFunction={randomFunction}
           setListName={setListName}
           setListPosition={setListPosition}

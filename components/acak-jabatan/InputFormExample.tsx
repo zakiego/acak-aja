@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction } from "react";
-import { useState } from "react";
 import {
   IoAdd,
   IoRemoveCircleOutline,
@@ -18,25 +17,21 @@ interface InputInterface {
 
   listPosition: string[];
 
-  handleRemoveClick: (index: number) => void;
-  handleAddClick: () => void;
-  handleInputChange: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => void;
+  mockName: string;
+  mockPosition: string[];
 }
 
 export default function NameInputForm(props: InputInterface) {
-  const [nameLength, setNameLength] = useState<number>(0);
+  // const [nameLength, setNameLength] = useState<number>(0);
 
-  const [tempListName, setTempListName] = useState<string[]>([]);
+  // const [tempListName, setTempListName] = useState<string[]>([]);
 
   return (
     <>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          props.randomFunction(tempListName);
+          props.randomFunction(SplitString(props.mockName as string));
         }}
       >
         <div>
@@ -45,18 +40,20 @@ export default function NameInputForm(props: InputInterface) {
             Nama
           </label>
           <textarea
+            disabled={true}
             id="name"
             name="name"
             rows={10}
+            value={props.mockName}
             className="input-primary mt-3"
             placeholder="Masukkan daftar nama di sini, pisahkan dengan enter"
-            onChange={async (e) => {
-              const list = SplitString(e.target.value);
-              setTempListName(list);
-              setNameLength(list.length);
-            }}
+            // onChange={async (e) => {
+            //   const list = SplitString(e.target.value);
+            //   setTempListName(list);
+            //   setNameLength(list.length);
+            // }}
           ></textarea>
-          <div className="mt-3">Kamu memasukkan {nameLength} nama</div>
+          <div className="mt-3">Kamu memasukkan {16} nama</div>
         </div>
 
         {/* table */}
@@ -81,22 +78,17 @@ export default function NameInputForm(props: InputInterface) {
                     <td className="py-2 pl-3 text-sm">{id + 1}</td>
                     <td className="px-3 py-2 text-sm">
                       <input
+                        disabled={true}
                         value={props.listPosition[id]}
-                        onChange={async (e) => {
-                          e.preventDefault();
-                          props.handleInputChange(e, id);
-                        }}
                         type="text"
                         className="input-secondary w-full text-sm"
                       ></input>
                     </td>
                     <td className="px-3 py-2">
                       <button
+                        disabled={true}
                         type="button"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          props.handleRemoveClick(id);
-                        }}
+                        className="disabled:cursor-not-allowed"
                       >
                         <IoTrashOutline className="h-5 w-5 text-rose-700/80 " />
                       </button>
@@ -108,11 +100,8 @@ export default function NameInputForm(props: InputInterface) {
               <tr>
                 <td className="py-2 pl-3 text-sm">
                   <button
-                    onClick={async (e) => {
-                      e.preventDefault();
-                      props.handleAddClick();
-                    }}
-                    className="flex items-center justify-center"
+                    disabled={true}
+                    className="flex items-center justify-center disabled:cursor-not-allowed"
                   >
                     <IoAdd className="h-5 w-5" />
                   </button>
@@ -135,13 +124,14 @@ export default function NameInputForm(props: InputInterface) {
 
           {/* reset button */}
           <button
+            disabled={true}
             type="reset"
-            onClick={() => {
-              props.setListName([]);
-              props.setListPosition([""]);
-              setNameLength(0);
-            }}
-            className="button-clear"
+            // onClick={() => {
+            //   props.setListName([]);
+            //   props.setListPosition([""]);
+            //   setNameLength(0);
+            // }}
+            className="button-clear	disabled:cursor-not-allowed"
           >
             <div className="flex items-center space-x-1">
               <div>Reset</div>

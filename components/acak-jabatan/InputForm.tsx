@@ -1,13 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
 import { useState } from "react";
-import {
-  IoAdd,
-  IoRemoveCircleOutline,
-  IoShuffle,
-  IoTrashOutline,
-} from "react-icons/io5";
+import { IoAdd, IoRemoveCircleOutline, IoTrashOutline } from "react-icons/io5";
 
-import { SplitString } from "../Helper";
+import NameForm from "../NameForm";
+import ShuffleButton from "../ShuffleButton";
 
 interface InputInterface {
   // randomFunction: (event: SyntheticEvent<Element, Event>) => Promise<void>;
@@ -24,9 +20,6 @@ interface InputInterface {
     e: React.ChangeEvent<HTMLInputElement>,
     index: number,
   ) => void;
-
-  mockName?: string;
-  mockPosition?: string[];
 }
 
 export default function NameInputForm(props: InputInterface) {
@@ -39,30 +32,14 @@ export default function NameInputForm(props: InputInterface) {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          props.randomFunction(SplitString(props.mockName as string));
+          props.randomFunction(tempListName);
         }}
       >
-        <div>
-          {/* form name */}
-          <label htmlFor="name" className="text-xl font-medium">
-            Nama
-          </label>
-          <textarea
-            disabled={true}
-            id="name"
-            name="name"
-            rows={10}
-            value={props.mockName}
-            className="input-primary mt-3"
-            placeholder="Masukkan daftar nama di sini, pisahkan dengan enter"
-            onChange={async (e) => {
-              const list = SplitString(e.target.value);
-              setTempListName(list);
-              setNameLength(list.length);
-            }}
-          ></textarea>
-          <div className="mt-3">Kamu memasukkan {16} nama</div>
-        </div>
+        <NameForm
+          setTempListName={setTempListName}
+          setNameLength={setNameLength}
+          nameLength={nameLength}
+        />
 
         {/* table */}
         <div className="mt-5">
@@ -86,7 +63,7 @@ export default function NameInputForm(props: InputInterface) {
                     <td className="py-2 pl-3 text-sm">{id + 1}</td>
                     <td className="px-3 py-2 text-sm">
                       <input
-                        disabled={true}
+                        placeholder="Nama jabatan yang mau diacak"
                         value={props.listPosition[id]}
                         onChange={async (e) => {
                           e.preventDefault();
@@ -98,9 +75,7 @@ export default function NameInputForm(props: InputInterface) {
                     </td>
                     <td className="px-3 py-2">
                       <button
-                        disabled={true}
                         type="button"
-                        className="disabled:cursor-not-allowed"
                         onClick={(e) => {
                           e.preventDefault();
                           props.handleRemoveClick(id);
@@ -116,12 +91,11 @@ export default function NameInputForm(props: InputInterface) {
               <tr>
                 <td className="py-2 pl-3 text-sm">
                   <button
-                    disabled={true}
                     onClick={async (e) => {
                       e.preventDefault();
                       props.handleAddClick();
                     }}
-                    className="flex items-center justify-center disabled:cursor-not-allowed"
+                    className="flex items-center justify-center"
                   >
                     <IoAdd className="h-5 w-5" />
                   </button>
@@ -135,23 +109,17 @@ export default function NameInputForm(props: InputInterface) {
 
         <div className="mt-4 space-x-10">
           {/* shuffle button */}
-          <button type="submit" className="button-submit mt-3 ">
-            <div className="flex items-center space-x-1">
-              <div>Acak</div>
-              <IoShuffle className="h-6 w-6" />
-            </div>
-          </button>
+          <ShuffleButton />
 
           {/* reset button */}
           <button
-            disabled={true}
             type="reset"
             onClick={() => {
               props.setListName([]);
               props.setListPosition([""]);
               setNameLength(0);
             }}
-            className="button-clear	disabled:cursor-not-allowed"
+            className="button-clear"
           >
             <div className="flex items-center space-x-1">
               <div>Reset</div>

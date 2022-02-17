@@ -1,4 +1,6 @@
 import Footer from "./Footer";
+import Navbar from "./Navbar";
+import SEO from "./SEO";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -7,15 +9,19 @@ interface LayoutProps {
 
 export default function Layout({ children, title }: LayoutProps) {
   return (
-    <div className="vercel mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center">
-      <main className="mt-8 mb-16 flex w-full flex-1 flex-col px-8  md:px-20">
-        <div className="mx-auto  mb-5 max-w-max rounded-md bg-sky-300/60 px-2 py-1  text-center text-sm text-gray-800/75">
-          preview version
+    <>
+      <SEO title={title} />
+
+      <div className="vercel">
+        <div className="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center">
+          <main className="mt-4 mb-16 flex w-full flex-1 flex-col px-8  md:px-20">
+            <Navbar />
+            <h1 className="mt-8 text-center text-4xl font-semibold">{title}</h1>
+            <div className="mt-4">{children}</div>
+          </main>
+          <Footer />
         </div>
-        <h1 className="text-center text-4xl font-semibold">{title}</h1>
-        <div className="mt-7">{children}</div>
-      </main>
-      <Footer />
-    </div>
+      </div>
+    </>
   );
 }

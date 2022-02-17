@@ -1,8 +1,8 @@
 import { useState } from "react";
 
+import NameInputForm from "~/components/acak-jabatan/NameInputForm-old";
+import RandomResult from "~/components/acak-jabatan/RandomResult-old";
 import { ShuffleArray, SplitString } from "~/components/Helper";
-import NameInputForm from "~/components/jabatan/NameInputForm-old";
-import RandomResult from "~/components/jabatan/RandomResult-old";
 import Layout from "~/components/Layout";
 
 export default function AcakJabatan() {
@@ -37,7 +37,7 @@ export default function AcakJabatan() {
     };
 
     const list = target.name.value;
-    setListName(ShuffleArray(SplitString(list)));
+    setListName(ShuffleArray(SplitString(list)) as string[]);
   }
 
   return (
