@@ -29,7 +29,7 @@ export default function Home() {
         <div className="text-center">
           <h1 className="text-5xl font-bold md:text-7xl">Acak Aja</h1>
           <h3 className="mt-4 opacity-70 md:text-xl">
-            Daripada tunjuk-tunjukan
+            Daripada tunjuk-tunjukkan
           </h3>
           <div className="text-mini-link mx-auto mt-4 max-w-max">
             <Link href="/saran">Kamu punya saran?</Link>

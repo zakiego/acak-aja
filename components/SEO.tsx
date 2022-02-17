@@ -6,10 +6,10 @@ interface SEOProps {
 
 export default function SEO({ title }: SEOProps) {
   const seo = {
-    titleDefault: `Acak Aja | Daripada Tunjuk-Tunjukan`,
+    titleDefault: `Acak Aja | Daripada Tunjuk-Tunjukkan`,
     titleComplete: `${
       title && `${title} - `
-    } Acak Aja | Daripada Tunjuk-Tunjukan`,
+    } Acak Aja | Daripada Tunjuk-Tunjukkan`,
     description: "Acak jabatan, kelompok, piket, dan angka ga pake lama",
     url: "https://acak-aja.vercel.app",
     image: "https://acak-aja.vercel.app/banner.png",
