@@ -44,9 +44,6 @@ export default function AcakKelompok() {
           handleReset={handleReset}
         />
 
-        {/* <div>{JSON.stringify(groups)}</div>
-        <div>{numberOfGroups}</div> */}
-
         {groups.length > 0 && (
           <div>
             <div className="mt-6">
