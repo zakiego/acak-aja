@@ -3,7 +3,11 @@ import { useState } from "react";
 
 import NameInputFormExmple from "~/components/acak-kelompok/InputFormExample";
 import RandomResult from "~/components/acak-kelompok/RandomResult";
-import { GroupByNGroup, ShuffleArray, SplitString } from "~/components/Helper";
+import {
+  GroupByNGroupGeneral,
+  ShuffleArray,
+  SplitString,
+} from "~/components/Helper";
 import Layout from "~/components/Layout";
 import { mockName } from "~/components/Mock";
 
@@ -13,7 +17,7 @@ export default function AcakKelompok() {
   const [numberOfGroups, setNumberOfGroups] = useState(3);
 
   async function handleRandomize() {
-    const groups = GroupByNGroup(
+    const groups = GroupByNGroupGeneral(
       numberOfGroups,
       ShuffleArray([...listName]) as string[],
     );

@@ -1,32 +1,47 @@
-import { Dispatch, SetStateAction } from "react";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { IoAdd, IoRemoveCircleOutline, IoTrashOutline } from "react-icons/io5";
 
+import { Position } from "../Helper";
 import NameForm from "../NameForm";
 import ShuffleButton from "../ShuffleButton";
 
 interface InputInterface {
-  // randomFunction: (event: SyntheticEvent<Element, Event>) => Promise<void>;
-  randomFunction: (listName: string[]) => Promise<void>;
+  randomFunction: (tempListName: string[]) => Promise<void>;
 
-  setListName: Dispatch<SetStateAction<string[]>>;
-  setListPosition: Dispatch<SetStateAction<string[]>>;
+  setListPosition: (value: SetStateAction<Position[]>) => void;
 
-  listPosition: string[];
+  listPosition: Position[];
 
   handleRemoveClick: (index: number) => void;
   handleAddClick: () => void;
-  handleInputChange: (
+  handleInpuChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number,
+    propertyToChange: "name" | "amount",
   ) => void;
 }
 
 export default function NameInputForm(props: InputInterface) {
   const [nameLength, setNameLength] = useState<number>(0);
   const [tempListName, setTempListName] = useState<string[]>([]);
+  const handleEnterJabatan = async (event: any) => {
+    if (event.key.toLowerCase() === "enter") {
+      event.preventDefault();
 
-  const handleEnter = async (event: any) => {
+      const form = event.target.form;
+      const index = [...form].indexOf(event.target);
+
+      //  check is in the last of column, if yes, add new column
+      if (form.length - index == 6) {
+        await props.handleAddClick();
+      }
+
+      // if no, just to move next column
+      form.elements[index + 3].focus();
+    }
+  };
+
+  const handleEnterJumlah = async (event: any) => {
     if (event.key.toLowerCase() === "enter") {
       event.preventDefault();
 
@@ -39,14 +54,14 @@ export default function NameInputForm(props: InputInterface) {
       }
 
       // if no, just to move next column
-      form.elements[index + 2].focus();
+      form.elements[index + 3].focus();
     }
   };
 
   return (
     <>
       <form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
           props.randomFunction(tempListName);
         }}
@@ -69,6 +84,7 @@ export default function NameInputForm(props: InputInterface) {
                   No
                 </th>
                 <th className="head-table px-3 py-3">Jabatan</th>
+                <th className="head-table px-3 py-3">Jumlah</th>
                 <th className="head-table"></th>
               </tr>
             </thead>
@@ -80,15 +96,30 @@ export default function NameInputForm(props: InputInterface) {
                     <td className="px-3 py-2 text-sm">
                       <input
                         placeholder="Nama jabatan yang mau diacak"
-                        value={props.listPosition[id]}
+                        value={props.listPosition[id].name}
                         onKeyDown={(e) => {
-                          handleEnter(e);
+                          handleEnterJabatan(e);
                         }}
                         onChange={async (e) => {
                           e.preventDefault();
-                          props.handleInputChange(e, id);
+                          props.handleInpuChange(e, id, "name");
                         }}
                         type="text"
+                        className="input-secondary w-full text-sm"
+                      ></input>
+                    </td>
+                    <td className="w-16 text-sm">
+                      <input
+                        defaultValue={1}
+                        min={1}
+                        type="number"
+                        onKeyDown={(e) => {
+                          handleEnterJumlah(e);
+                        }}
+                        onChange={async (e) => {
+                          e.preventDefault();
+                          props.handleInpuChange(e, id, "amount");
+                        }}
                         className="input-secondary w-full text-sm"
                       ></input>
                     </td>
@@ -134,8 +165,7 @@ export default function NameInputForm(props: InputInterface) {
           <button
             type="reset"
             onClick={() => {
-              props.setListName([]);
-              props.setListPosition([""]);
+              props.setListPosition([{ name: "", amount: 1, member: [] }]);
               setNameLength(0);
             }}
             className="button-clear"

@@ -1,3 +1,9 @@
+export type Position = {
+  name: string;
+  amount: number;
+  member: string[];
+};
+
 export function ShuffleArray(array: string[] | number[]) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -20,7 +26,10 @@ export function CreateEmptyArrayInArray(numberOfGroups: number) {
   return bucket;
 }
 
-export function GroupByNGroup(numberOfGroups: number, listName: string[]) {
+export function GroupByNGroupGeneral(
+  numberOfGroups: number,
+  listName: string[],
+) {
   const bucket: string[][] = CreateEmptyArrayInArray(numberOfGroups);
 
   let loopGrup = 0;
@@ -39,9 +48,35 @@ export function GroupByNGroup(numberOfGroups: number, listName: string[]) {
   return bucket;
 }
 
+export function GroupByNGroupJabatan(
+  listPosition: Position[],
+  listName: string[],
+) {
+  let indexListName = 0;
+
+  for (let i = 0; i < listPosition.length; i++) {
+    const bucket = [];
+
+    for (let x = 0; x < listPosition[i].amount; x++) {
+      bucket.push(listName[indexListName]);
+      indexListName++;
+    }
+
+    listPosition[i].member = bucket;
+  }
+
+  return listPosition;
+}
+
 export function FilterTrueDayOnly(listDay: { name: string; value: boolean }[]) {
   return listDay.filter(function (day) {
     return day.value;
+  });
+}
+
+export function FilterArrayJSONNotNull(listPosition: Position[]) {
+  return listPosition.filter(function (position) {
+    return position.name;
   });
 }
 
@@ -79,37 +114,6 @@ export const DefaultDay = [
   {
     name: "Jum'at",
     value: true,
-  },
-  {
-    name: "Sabtu",
-    value: false,
-  },
-  {
-    name: "Minggu",
-    value: false,
-  },
-];
-
-export const ResetDefaultDay = [
-  {
-    name: "Senin",
-    value: false,
-  },
-  {
-    name: "Selasa",
-    value: false,
-  },
-  {
-    name: "Rabu",
-    value: false,
-  },
-  {
-    name: "Kamis",
-    value: false,
-  },
-  {
-    name: "Jum'at",
-    value: false,
   },
   {
     name: "Sabtu",
