@@ -6,7 +6,7 @@ import RandomResult from "~/components/acak-piket/RandomResult";
 import {
   DefaultDay,
   FilterTrueDayOnly,
-  GroupByNGroup,
+  GroupByNGroupGeneral,
   ShuffleArray,
   SplitString,
 } from "~/components/Helper";
@@ -28,7 +28,7 @@ export default function AcakPiket() {
     const dayTrue = FilterTrueDayOnly(listDay);
     const numberOfGroups = dayTrue.length;
 
-    const groups = GroupByNGroup(
+    const groups = GroupByNGroupGeneral(
       numberOfGroups,
       ShuffleArray([...listName]) as string[],
     );
